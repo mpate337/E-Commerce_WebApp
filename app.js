@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const passport = require('passport');
 const mongoose = require('mongoose');
-const config = require('./config/database');
+const config = require('./Lab5/config/database');
 
 // Connect To Database
 mongoose.connect(config.database);
@@ -21,7 +21,7 @@ mongoose.connection.on('error', (err) => {
 
 const app = express();
 
-const users = require('./routes/users');
+const users = require('./Lab5/routes/users');
 
 // Port Number
 const port = 3000;
@@ -39,8 +39,7 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
-require('./config/passport')(passport);
-
+require('./Lab5/config/passport')(passport);
 app.use('/users', users);
 
 // Index Route
