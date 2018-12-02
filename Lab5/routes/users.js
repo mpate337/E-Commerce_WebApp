@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 const User = require('../models/user');
 const Admin = require('../models/admin');
+const Item = require('../models/items');
 
 // Register
 router.post('/register', (req, res, next) => {
@@ -30,7 +31,6 @@ router.post('/authenticate', (req, res, next) => {
   const password = req.body.password;
 
   User.getUserByUsername(username, (err, user) => {
-    console.log(user)
     if(err) throw err;
     if(!user){
       return res.json({success: false, msg: 'User not found'});
@@ -74,10 +74,8 @@ router.post('/authenticate/admin', (req, res, next) => {
     }
 
     Admin.comparePassword(admin_password, admin.admin_password, (err, isMatch) => {
-      console.log(admin_password, admin.admin_password, admin_password==admin.admin_password)
       if(err) throw err;
       if(admin_password==admin.admin_password){
-        console.log("if part")
         const token = jwt.sign(admin.toJSON(), config.secret, {
           expiresIn: 604800 // 1 week
         });
@@ -96,6 +94,38 @@ router.post('/authenticate/admin', (req, res, next) => {
     });
   });
 });
+
+// Add Item
+router.post('/authenticate/addItem', (req, res, next) => {
+  let item = new Item({
+    item_name: req.body.item_name,
+    item_quantity: req.body.item_quantity,
+    item_price: req.body.item_price,
+    item_tax: req.body.item_tax
+  });
+
+  Item.addItem(item, (err, item) => {
+    if(err){
+      res.json({success: false, msg:'Failed to add item'});
+    } else {
+      res.json({success: true, msg:'Item added'});
+    }
+  });
+});
+
+router.get('/authenticate/viewItem', function (req, res) {
+  Item.find(function (err, items){
+   if(err){
+     console.log(err);
+   }
+   else {
+     console.log(items)
+     res.json({items});
+   }
+ });
+});
+
+
 
 // Profile
 router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res, next) => {

@@ -16,6 +16,9 @@ import {ValidateService} from './services/validate.service';
 import {AuthService} from './services/auth.service';
 import {FlashMessagesModule} from 'angular2-flash-messages';
 import { AdminComponent } from './components/admin/admin.component';
+import { CreateComponent } from './components/create/create.component';
+import { EditComponent } from './components/edit/edit.component';
+import { IndexComponent } from './components/index/index.component';
 
 const appRoutes: Routes =  [
   {path:'', component: HomeComponent},
@@ -23,7 +26,9 @@ const appRoutes: Routes =  [
   {path:'login', component: LoginComponent},
   {path:'dashboard', component: DashboardComponent},
   {path:'profile', component: ProfileComponent},
-  {path:'admin', component: AdminComponent}
+  {path:'admin', component: AdminComponent},
+  {path:'admin/addItem', component: CreateComponent},
+  {path:'admin/viewItem',component: IndexComponent}
 ]
 
 @NgModule({
@@ -35,7 +40,10 @@ const appRoutes: Routes =  [
     HomeComponent,
     DashboardComponent,
     ProfileComponent,
-    AdminComponent
+    AdminComponent,
+    CreateComponent,
+    EditComponent,
+    IndexComponent
   ],
   imports: [
     BrowserModule,

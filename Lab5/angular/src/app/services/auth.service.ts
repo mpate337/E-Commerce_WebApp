@@ -38,6 +38,20 @@ export class AuthService {
     this.admin = admin;
   }
 
+  addItem(item){
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:3000/users/authenticate/addItem', item,{headers: headers})
+      .map(res => res.json());
+  }
+
+  getItems(){
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.get('http://localhost:3000/users/authenticate/viewItem', {headers: headers})
+      .map(res => res.json());
+  }
+
   storeUserData(token, user){
     localStorage.setItem('id_token', token);
     localStorage.setItem('user', JSON.stringify(user));

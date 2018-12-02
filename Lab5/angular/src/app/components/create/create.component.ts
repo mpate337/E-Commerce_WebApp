@@ -4,33 +4,35 @@ import {Router} from '@angular/router';
 import {FlashMessagesService} from 'angular2-flash-messages';
 
 @Component({
-  selector: 'app-admin',
-  templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.css']
+  selector: 'app-create',
+  templateUrl: './create.component.html',
+  styleUrls: ['./create.component.css']
 })
-export class AdminComponent implements OnInit {
-  admin_username: String;
-  admin_password: String;
+export class CreateComponent implements OnInit {
+
+  item_name: String;
+  item_quantity: String;
+  item_price: String;
+  item_tax: String;
 
   constructor(
     private authService:AuthService,
     private router:Router,
     private flashMessage:FlashMessagesService
   ) { }
-
-  ngOnInit() {
-  }
-
-  onLoginAdminSubmit(){
-    const admin = {
-      admin_username: this.admin_username,
-      admin_password: this.admin_password
+    
+  addItem(){
+    const item = {
+      item_name :  this.item_name,
+      item_quantity : this.item_quantity,
+      item_price : this.item_price,
+      item_tax : this.item_tax
     }
 
-    this.authService.authenticateAdmin(admin).subscribe(data => {
+    this.authService.addItem(item).subscribe(data => {
+      console.log(data, item)
       if(data.success){
-        this.authService.storeAdminData(data.token, data.admin);
-        this.flashMessage.show('You are now logged in', {
+        this.flashMessage.show('Item has added', {
           cssClass: 'alert-success',
           timeout: 5000});
         this.router.navigate(['admin/viewItem']);
@@ -38,9 +40,11 @@ export class AdminComponent implements OnInit {
         this.flashMessage.show(data.msg, {
           cssClass: 'alert-danger',
           timeout: 5000});
-        this.router.navigate(['admin']);
+        this.router.navigate(['admin/addItem']);
       }
     });
+  }
+  ngOnInit() {
   }
 
 }
