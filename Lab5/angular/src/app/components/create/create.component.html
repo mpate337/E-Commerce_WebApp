@@ -3,6 +3,7 @@
       <li>
           <a href="http://localhost:4200/admin/viewItem">View Items</a>
           <a href="http://localhost:4200/admin/addItem">Add Items</a>
+          <a href="http://localhost:4200/admin/viewUsers">View Users</a>
       </li>
   </ul>
 </div>
@@ -10,19 +11,19 @@
 <h2 class="page-header">Add Item</h2>
 <form (submit)="addItem()">
   <div class="form-group">
-    <label>Item Name</label>
+    <label>Item Name : </label>
     <input type="text" class="form-control" [(ngModel)]="item_name" name="item_name">
   </div>
   <div class="form-group">
-    <label>Item Quantity</label>
+    <label>Item Quantity : </label>
     <input type="text" class="form-control" [(ngModel)]="item_quantity" name="item_quantity">
   </div>
   <div class="form-group">
-      <label>Item Price</label>
+      <label>Item Price : </label>
       <input type="text" class="form-control" [(ngModel)]="item_price" name="item_price">
   </div>
   <div class="form-group">
-      <label>Item Tax</label>
+      <label>Item Tax : </label>
       <input type="text" class="form-control" [(ngModel)]="item_tax" name="item_tax">
   </div>
   <input type="submit" class="btn btn-primary" value="Add Item">

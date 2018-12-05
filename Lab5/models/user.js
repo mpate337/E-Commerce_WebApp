@@ -18,6 +18,10 @@ const UserSchema = mongoose.Schema({
   password: {
     type: String,
     required: true
+  },
+  activate: {
+    type: Boolean,
+    default: true
   }
 },{
   collection: 'users'
@@ -49,6 +53,17 @@ module.exports.comparePassword = function(candidatePassword, hash, callback){
   bcrypt.compare(candidatePassword, hash, (err, isMatch) => {
     if(err) throw err;
     callback(null, isMatch);
+  });
+}
+
+module.exports.getUsers = function(user, res){
+  User.find(function (err, users){
+    if(err){
+      console.log(err);
+    }
+    else {
+      res.json(users);
+    }
   });
 }
 

@@ -1,48 +1,20 @@
-<!-- <div class="panel panel-primary">
-  <div class="panel-heading">
-    {{ title }}
+<h2 class="page-header">Edit Item</h2>
+<form (submit)="editItem()">
+  <div class="form-group">
+    <label>Item Name : </label>
+    <input type="text" class="form-control" [(ngModel)]="item_name" name="item_name">
   </div>
-  <div class="panel-body" style="background: bisque; font-size: 18px; margin-top: 10px; padding-left: 10px; border: solid">
-    <form [formGroup]="angForm" novalidate>
-      <div class="form-group">
-        <label class="col-md-4">Item Name</label>
-        <input type="text" class="form-control" formControlName="name" #name style="width: 98%; margin-left:1%"/>
-      </div>
-      <div *ngIf="angForm.controls['name'].invalid && (angForm.controls['name'].dirty || angForm.controls['name'].touched)" class="alert alert-danger">
-        <div *ngIf="angForm.controls['name'].errors.required">
-          Name is required.
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-md-4">Item Price</label>
-        <input type="text" class="form-control" formControlName="price" #price style="width: 98%; margin-left:1%"/>
-      </div>
-      <div *ngIf="angForm.controls['price'].invalid && (angForm.controls['price'].dirty || angForm.controls['price'].touched)" class="alert alert-danger">
-        <div *ngIf="angForm.controls['price'].errors.required">
-          Price is required.
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-md-4">Item Quantity</label>
-        <input type="text" class="form-control" formControlName="quantity" #quantity style="width: 98%; margin-left:1%"/>
-      </div>
-      <div *ngIf="angForm.controls['quantity'].invalid && (angForm.controls['quantity'].dirty || angForm.controls['quantity'].touched)" class="alert alert-danger">
-        <div *ngIf="angForm.controls['quantity'].errors.required">
-          Quantity is required.
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-md-4">Item Tax</label>
-        <input type="text" class="form-control" formControlName="tax" #tax style="width: 98%; margin-left:1%"/>
-      </div>
-      <div *ngIf="angForm.controls['tax'].invalid && (angForm.controls['tax'].dirty || angForm.controls['tax'].touched)" class="alert alert-danger">
-        <div *ngIf="angForm.controls['tax'].errors.required">
-          Tax is required.
-        </div>
-      </div>
-        <div class="form-group">
-          <button (click)="updateItem(name.value, price.value, quantity.value, tax.value)" style="width: 20%; margin-left:1%" [disabled]="angForm.pristine || angForm.invalid" class="btn btn-primary">Update</button>
-        </div>
-    </form>
+  <div class="form-group">
+    <label>Item Quantity : </label>
+    <input type="text" class="form-control" [(ngModel)]="item_quantity" name="item_quantity">
   </div>
-</div> -->
+  <div class="form-group">
+      <label>Item Price : </label>
+      <input type="text" class="form-control" [(ngModel)]="item_price" name="item_price">
+  </div>
+  <div class="form-group">
+      <label>Item Tax : </label>
+      <input type="text" class="form-control" [(ngModel)]="item_tax" name="item_tax">
+  </div>
+  <input type="submit" class="btn btn-primary" value="Add Item">
+</form>

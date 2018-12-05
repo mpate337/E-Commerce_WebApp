@@ -1,8 +1,13 @@
 <div>
     <ul>
         <li>
-            <a href="http://localhost:4200/admin/viewItem">View Items</a>
-            <a href="http://localhost:4200/admin/addItem">Add Items</a>
+            <a [routerLink]="['/admin/viewItem']">View Items</a>
+        </li>
+        <li>
+            <a [routerLink]="['/admin/addItem']">Add Item</a>
+        </li>
+        <li>
+            <a [routerLink]="['/admin/viewUsers']">View Users</a>
         </li>
     </ul>
 </div>
@@ -24,8 +29,8 @@
           <td style="border: solid">{{ item.item_price }}</td>
           <td style="border: solid">{{ item.item_quantity }}</td>
           <td style="border: solid">{{ item.item_tax }}</td>
-          <!-- <td style="border: solid"><a [routerLink]="['/edit', item._id]" class="btn btn-primary" style="background-color: green; border-color: green">Edit</a></td>
-          <td style="border: solid"><button (click)="deleteItem(item._id)"  class="btn btn-danger" style="background-color: black; border-color: black">Delete</button></td> -->
+          <td style="border: solid"><a [routerLink]="['/admin/editItem', item._id]" class="btn btn-primary" style="background-color: green; border-color: green">Edit</a></td>
+          <!-- <td style="border: solid"><button (click)="deleteItem(item._id)"  class="btn btn-danger" style="background-color: black; border-color: black">Delete</button></td> -->
       </tr>
   </tbody>
 </table>

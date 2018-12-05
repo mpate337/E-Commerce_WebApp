@@ -113,18 +113,76 @@ router.post('/authenticate/addItem', (req, res, next) => {
   });
 });
 
+
+//get Items
 router.get('/authenticate/viewItem', function (req, res) {
   Item.find(function (err, items){
    if(err){
      console.log(err);
    }
    else {
-     console.log(items)
      res.json({items});
    }
  });
 });
 
+//get Users
+router.get('/authenticate/viewUsers', function (req, res) {
+  User.find(function (err, users){
+   if(err){
+     console.log(err);
+   }
+   else {
+    //  console.log(users)
+     res.json({users});
+   }
+ });
+});
+
+//deactivate user
+router.post('/admin/deactivate/:id', function (req,res,next) {
+  User.findById(req.params.id, function(err, user) {
+    if(!user)
+    return next(new Error ('Could not load user'));
+    else{
+      user.name = user.name;
+      user.email = user.email;
+      user.username = user.username;
+      user.passowd = user.password;
+      user.activate = false
+
+      user.save().then(user => {
+        res.json('Update complete');
+      })
+      .catch(err => {
+        res.status(400).send("unable to update the database");
+      });
+    }
+  })
+})
+
+
+//update item
+router.post('/authenticate/admin/updateItem', function(req,res,next){
+  console.log(req.params.id, "id")
+  Item.findById(req.params.id, function(err, item) {
+    if (!item)
+      return next(new Error('Could not load Document'));
+    else {
+      item.item_name = req.body.item_name;
+      item.item_price = req.body.item_price;
+      item.item_quantity = req.body.item_quantity;
+      item.item_tax = req.body.item_tax;
+
+      item.save().then(item => {
+          res.json('Update complete');
+      })
+      .catch(err => {
+            res.status(400).send("unable to update the database");
+      });
+    }
+  });
+})
 
 
 // Profile

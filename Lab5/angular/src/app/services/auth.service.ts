@@ -52,6 +52,27 @@ export class AuthService {
       .map(res => res.json());
   }
 
+  getUsers(){
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.get('http://localhost:3000/users/authenticate/viewUsers', {headers: headers})
+      .map(res => res.json());
+  }
+
+  updateItem(item, id){
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:3000/users/authenticate/admin/updateItem', item ,{headers: headers})
+      .map(res => res.json());
+  }
+
+  deactivateUser(id){
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.put('http://localhost:3000/users/admin/deactivate/'+ id ,'', {headers: headers})
+      .map(res => res.json());
+  }
+
   storeUserData(token, user){
     localStorage.setItem('id_token', token);
     localStorage.setItem('user', JSON.stringify(user));

@@ -1,0 +1,37 @@
+<div>
+  <ul>
+      <li>
+          <a [routerLink]="['/admin/viewItem']">View Items</a>
+      </li>
+      <li>
+          <a [routerLink]="['/admin/addItem']">Add Item</a>
+      </li>
+      <li>
+          <a [routerLink]="['/admin/viewUsers']">View Users</a>
+      </li>
+  </ul>
+</div>
+
+<table class="table table-hover" style="border: solid 2px; margin-top: 10px; background-color: bisque">
+<thead style="border: solid">
+<tr style="font-weight: bold">
+    <td style="border: solid"> ID</td>
+    <td style="border: solid"> Name</td>
+    <td style="border: solid"> Email</td>
+    <td style="border: solid">Username</td>
+    <td style="border: solid"> Activate </td>
+    <td style="border: solid"> Action </td>
+</tr>
+</thead>
+
+<tbody>
+    <tr *ngFor="let user of users">
+        <td style="border: solid">{{ user._id }}</td>
+        <td style="border: solid">{{ user.name }}</td>
+        <td style="border: solid">{{ user.email }}</td>
+        <td style="border: solid">{{ user.username }}</td>
+        <td style="border: solid">{{ user.activate }}</td>
+        <td style="border: solid"><button (click)="deactivateUser(user._id)"  class="btn btn-danger">Deactivate</button></td>
+    </tr>
+</tbody>
+</table>
