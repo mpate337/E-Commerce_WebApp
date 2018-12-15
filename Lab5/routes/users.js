@@ -162,9 +162,17 @@ router.post('/admin/deactivate/:id', function (req,res,next) {
 })
 
 
+//edit item
+router.get('/authenticate/admin/editItem/:id', function(req,res){
+  var id = req.params.id;
+  Item.findById(id, function(err,item){
+    res.json(item);
+  })
+})
+
 //update item
-router.post('/authenticate/admin/updateItem', function(req,res,next){
-  console.log(req.params.id, "id")
+router.post('/authenticate/admin/updateItem/:id', function(req,res,next){
+  // console.log(req.params.id, "id")
   Item.findById(req.params.id, function(err, item) {
     if (!item)
       return next(new Error('Could not load Document'));
@@ -181,6 +189,14 @@ router.post('/authenticate/admin/updateItem', function(req,res,next){
             res.status(400).send("unable to update the database");
       });
     }
+  });
+})
+
+//delete Item
+router.get('/authenticate/admin/deleteItem/:id', function(req,res){
+  Item.findByIdAndRemove({_id: req.params.id}, function(err, item){
+    if(err) res.json(err);
+    else res.json('Successfully removed');
   });
 })
 

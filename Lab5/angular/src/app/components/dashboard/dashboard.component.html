@@ -1,3 +1,25 @@
-<p>
-  dashboard works!
-</p>
+<table class="table table-hover" style="border: solid 2px; margin-top: 10px; background-color: bisque">
+  <thead style="border: solid">
+  <tr style="font-weight: bold">
+      <td style="border: solid">Item Name</td>
+      <td style="border: solid">Item Price</td>
+      <td style="border: solid">Available Quantity</td>
+      <td style="border: solid">Item Tax</td>
+      <td style="border: solid">Quantity</td>
+      <td style="border: solid">Action</td>
+  </tr>
+  </thead>
+
+  <tbody>
+      <tr *ngFor="let item of items">
+          <td style="border: solid">{{ item.item_name }}</td>
+          <td style="border: solid">{{ item.item_price }}</td>
+          <td style="border: solid">{{ item.item_quantity }}</td>
+          <td style="border: solid">{{ item.item_tax }}</td>
+          <td style="border: solid"><input type="number" name="qty_entered" value=1 id="entrd_qty"></td>
+          <td style="border: solid"><button (click)="addToCart(item._id)">Add to cart</button></td>
+      </tr>
+  </tbody>
+</table>
+
+<button value="Show Cart">Show Cart</button>

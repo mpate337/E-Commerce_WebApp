@@ -9,7 +9,7 @@ import {FlashMessagesService} from 'angular2-flash-messages';
   styleUrls: ['./edit.component.css']
 })
 export class EditComponent implements OnInit {
-
+  item: any;
   item_name: String;
   item_quantity: String;
   item_price: String;
@@ -41,17 +41,17 @@ export class EditComponent implements OnInit {
           this.flashMessage.show(data.msg, {
             cssClass: 'alert-danger',
             timeout: 5000});
-          this.router.navigate(['admin/editItem']);
+          this.router.navigate(['admin/viewItem']);
         }
       });
     })
   }
 
   ngOnInit() {
-    // this.route.params.subscribe(params => {
-    //   this.item = this.service.editItem(params['id']).subscribe(res => {
-    //     this.item = res;
-    //   });
-    // });
+    this.route.params.subscribe(params => {
+      this.item = this.authService.editItem(params['id']).subscribe(res => {
+        this.item = res;
+      });
+    });
   }
 }

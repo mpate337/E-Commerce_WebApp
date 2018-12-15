@@ -59,11 +59,19 @@ export class AuthService {
       .map(res => res.json());
   }
 
+  editItem(id) {
+    const uri = 'http://localhost:3000/users/authenticate/admin/editItem/' + id;
+    return this.http.get(uri).map(res => res.json());
+  }
+
   updateItem(item, id){
-    let headers = new Headers();
-    headers.append('Content-Type','application/json');
-    return this.http.post('http://localhost:3000/users/authenticate/admin/updateItem', item ,{headers: headers})
-      .map(res => res.json());
+    const uri = 'http://localhost:3000/users/authenticate/admin/updateItem/' + id;
+    return this.http.post(uri, item).map(res => res.json());
+  }
+
+  deleteItem(id){
+    const uri = 'http://localhost:3000/users/authenticate/admin/deleteItem/' + id;
+    return this.http.get(uri).map(res => res.json());
   }
 
   deactivateUser(id){

@@ -43,10 +43,10 @@ export class IndexComponent implements OnInit {
     });
   }
 
-  // deleteItem(id) {
-  //   this.service.deleteItem(id).subscribe(res => {
-  //     console.log('Deleted');
-  //     window.location.reload()
-  //   });
-  // }
+  deleteItem(id) {
+    this.authService.deleteItem(id).subscribe(res => {
+      console.log('Deleted');
+      window.location.reload()
+    });
+  }
 }
