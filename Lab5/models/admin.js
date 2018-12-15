@@ -34,3 +34,7 @@ module.exports.comparePassword = function(candidatePassword, hash, callback){
     callback(null, isMatch);
   });
 }
+
+module.exports.addUser = function(newUser, callback){
+    newUser.save(callback);
+}

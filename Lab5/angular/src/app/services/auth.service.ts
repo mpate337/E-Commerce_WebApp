@@ -70,14 +70,26 @@ export class AuthService {
   }
 
   deleteItem(id){
-    const uri = 'http://localhost:3000/users/authenticate/admin/deleteItem/' + id;
+    const uri = 'http://localhost:3000/users/admin/deleteItem/' + id;
     return this.http.get(uri).map(res => res.json());
+  }
+
+  showCart(param){
+    const uri = 'http://localhost:3000/users/cart';
+    return this.http.post(uri, param).map(res => res.json());
   }
 
   deactivateUser(id){
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    return this.http.put('http://localhost:3000/users/admin/deactivate/'+ id ,'', {headers: headers})
+    return this.http.post('http://localhost:3000/users/admin/deactivate/'+ id, {headers: headers})
+      .map(res => res.json());
+  }
+
+  addToAdmin(id){
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:3000/users/admin/addtoadmin/'+ id, {headers: headers})
       .map(res => res.json());
   }
 

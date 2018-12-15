@@ -1,10 +1,14 @@
 <div>
   <ul>
-      <li>
-          <a href="http://localhost:4200/admin/viewItem">View Items</a>
-          <a href="http://localhost:4200/admin/addItem">Add Items</a>
-          <a href="http://localhost:4200/admin/viewUsers">View Users</a>
-      </li>
+    <li>
+      <a [routerLink]="['/admin/viewItem']">View Items</a>
+    </li>
+    <li>
+      <a [routerLink]="['/admin/addItem']">Add Item</a>
+    </li>
+    <li>
+      <a [routerLink]="['/admin/viewUsers']">View Users</a>
+    </li>
   </ul>
 </div>
 

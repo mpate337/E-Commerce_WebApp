@@ -7,7 +7,7 @@ const User = require('../models/user');
 const Admin = require('../models/admin');
 const Item = require('../models/items');
 
-// Register
+// Register Users
 router.post('/register', (req, res, next) => {
   let newUser = new User({
     name: req.body.name,
@@ -43,6 +43,12 @@ router.post('/authenticate', (req, res, next) => {
           expiresIn: 604800 // 1 week
         });
 
+        if(user.activate == false){
+          res.json({
+            success: false, msg: 'Your Account is Deactivated, please contact store manager.'
+          });
+        }
+
         res.json({
           success: true,
           token: 'JWT '+token,
@@ -60,6 +66,19 @@ router.post('/authenticate', (req, res, next) => {
   });
 });
 
+//show cart for user
+router.post('/cart', function(req,res){
+  console.log(req.body[0].id)
+  for(var i=0; i<req.body.length; i++){
+    Item.findById(req.body[i].id), function(err,item){
+      if(err) res.json(err);
+      else 
+      {res.json({item})
+      console.log(item)}
+    }
+  }
+})
+
 //Authenticate Admin
 router.post('/authenticate/admin', (req, res, next) => {
   const admin_username = req.body.admin_username;
@@ -75,7 +94,7 @@ router.post('/authenticate/admin', (req, res, next) => {
 
     Admin.comparePassword(admin_password, admin.admin_password, (err, isMatch) => {
       if(err) throw err;
-      if(admin_password==admin.admin_password){
+      if(isMatch){
         const token = jwt.sign(admin.toJSON(), config.secret, {
           expiresIn: 604800 // 1 week
         });
@@ -114,7 +133,7 @@ router.post('/authenticate/addItem', (req, res, next) => {
 });
 
 
-//get Items
+//Get Items
 router.get('/authenticate/viewItem', function (req, res) {
   Item.find(function (err, items){
    if(err){
@@ -126,7 +145,7 @@ router.get('/authenticate/viewItem', function (req, res) {
  });
 });
 
-//get Users
+//Get Users
 router.get('/authenticate/viewUsers', function (req, res) {
   User.find(function (err, users){
    if(err){
@@ -139,30 +158,7 @@ router.get('/authenticate/viewUsers', function (req, res) {
  });
 });
 
-//deactivate user
-router.post('/admin/deactivate/:id', function (req,res,next) {
-  User.findById(req.params.id, function(err, user) {
-    if(!user)
-    return next(new Error ('Could not load user'));
-    else{
-      user.name = user.name;
-      user.email = user.email;
-      user.username = user.username;
-      user.passowd = user.password;
-      user.activate = false
-
-      user.save().then(user => {
-        res.json('Update complete');
-      })
-      .catch(err => {
-        res.status(400).send("unable to update the database");
-      });
-    }
-  })
-})
-
-
-//edit item
+//Edit item
 router.get('/authenticate/admin/editItem/:id', function(req,res){
   var id = req.params.id;
   Item.findById(id, function(err,item){
@@ -192,14 +188,61 @@ router.post('/authenticate/admin/updateItem/:id', function(req,res,next){
   });
 })
 
-//delete Item
-router.get('/authenticate/admin/deleteItem/:id', function(req,res){
+//Delete Item
+router.get('/admin/deleteItem/:id', function(req,res){
   Item.findByIdAndRemove({_id: req.params.id}, function(err, item){
     if(err) res.json(err);
     else res.json('Successfully removed');
   });
 })
 
+//Add to admin
+router.post('/admin/addtoadmin/:id', function (req,res,next) {
+  User.findById(req.params.id, function(err, user) {
+    if(!user)
+    return next(new Error ('Could not load user'));
+    else{
+      let newUser = new Admin({
+        admin_username : user.username,
+        admin_password : user.password
+      });
+    
+      Admin.addUser(newUser, (err, admin) => {
+        if(err){
+          res.json({success: false, msg:'Failed to register user'});
+        } else {
+          res.json({success: true, msg:'User registered'});
+        }
+      });
+    }
+  })
+})
+
+//Deactivate user
+router.post('/admin/deactivate/:id', function (req,res,next) {
+  User.findById(req.params.id, function(err, user) {
+    if(!user)
+    return next(new Error ('Could not load user'));
+    else{
+      user.name = user.name;
+      user.email = user.email;
+      user.username = user.username;
+      user.passowd = user.password;
+      if(user.activate == true){
+        user.activate = false
+      }else{
+        user.activate = true
+      }
+
+      user.save().then(user => {
+        res.json('Update complete');
+      })
+      .catch(err => {
+        res.status(400).send("unable to update the database");
+      });
+    }
+  })
+})
 
 // Profile
 router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res, next) => {

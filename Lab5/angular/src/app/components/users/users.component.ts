@@ -34,9 +34,16 @@ export class UsersComponent implements OnInit {
 
   deactivateUser(id) {
     this.authService.deactivateUser(id).subscribe(res => {
-      console.log('Deleted');
+      console.log('Deactivated');
       window.location.reload()
     });
+  }
+
+  addToAdmin(id){
+    this.authService.addToAdmin(id).subscribe(res => {
+      console.log('Added To Admin');
+      window.location.reload()
+    })
   }
 
 }

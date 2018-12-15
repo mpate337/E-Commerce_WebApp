@@ -19,17 +19,6 @@ export class IndexComponent implements OnInit {
 
   ngOnInit() {
     this.getItems();
-    // var urlParams = [];
-    // window.location.search.replace("?", "").split("&").forEach(function (e, i) {
-    //     var p = e.split("=");
-    //     urlParams[p[0]] = p[1];
-    // });
-
-    // if(urlParams["true"]) {}else{
-
-    //     let win = (window as any);
-    //     win.location.search = '?true=1';
-    // }
   }
 
   getItems() {

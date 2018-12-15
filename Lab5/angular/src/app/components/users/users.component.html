@@ -20,7 +20,7 @@
     <td style="border: solid"> Email</td>
     <td style="border: solid">Username</td>
     <td style="border: solid"> Activate </td>
-    <td style="border: solid"> Action </td>
+    <td colspan="2" style="border: solid"> Action </td>
 </tr>
 </thead>
 
@@ -31,7 +31,8 @@
         <td style="border: solid">{{ user.email }}</td>
         <td style="border: solid">{{ user.username }}</td>
         <td style="border: solid">{{ user.activate }}</td>
-        <td style="border: solid"><button (click)="deactivateUser(user._id)"  class="btn btn-danger">Deactivate</button></td>
+        <td style="border: solid"><button (click)="deactivateUser(user._id)">Deactivate/Activate</button></td>
+        <td style="border: solid"><button (click)="addToAdmin(user._id)">Add To Manager</button></td>
     </tr>
 </tbody>
 </table>

@@ -10,13 +10,14 @@ import {Router} from '@angular/router';
 export class DashboardComponent implements OnInit {
 
   items: any;
-  added: [any];
+  added: Array<any>;
   constructor(
     private authService:AuthService,
   ) { }
 
   ngOnInit() {
     this.getItems();
+    this.added = [];
   }
 
   getItems() {
@@ -31,9 +32,14 @@ export class DashboardComponent implements OnInit {
   }
 
   addToCart(id){
-    var ex = (<HTMLInputElement>document.getElementById("entrd_qty")).value
+    var qty = (<HTMLInputElement>document.getElementById("entrd_qty")).value
+    this.added.push({id, qty})
     console.log(this.added)
-    this.added.push(ex, id)
-    console.log(this.added)
+  }
+
+  showCart(){
+    this.authService.showCart(this.added).subscribe(res => {
+      
+    });
   }
 }
