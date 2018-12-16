@@ -23,7 +23,6 @@ export class DashboardComponent implements OnInit {
   getItems() {
     this.authService.getItems().subscribe(items => {
       this.items = items.items;
-      // console.log(items.items,"abcd", this.items[0].item_name)
     },
     err => {
       console.log(err);
@@ -32,14 +31,20 @@ export class DashboardComponent implements OnInit {
   }
 
   addToCart(id){
-    var qty = (<HTMLInputElement>document.getElementById("entrd_qty")).value
-    this.added.push({id, qty})
+    var qty = (<HTMLInputElement>document.getElementById("qty_entered"+id)).value
+    this.added.push({"id": id,"qty": qty})
     console.log(this.added)
   }
 
   showCart(){
     this.authService.showCart(this.added).subscribe(res => {
-      
+      console.log(res)
     });
+  }
+
+  addToCollection(id){
+    this.authService.addToCollection(id).subscribe(res => {
+      console.log(res)
+    })
   }
 }

@@ -1,0 +1,19 @@
+<table >
+  <thead>
+  <tr>
+      <td>Item Name</td>
+      <td>Item Price</td>
+      <td>Private Collection</td>
+  </tr>
+  </thead>
+
+  <tbody>
+      <tr *ngFor="let collection of collections">
+          <td>{{ collection.item_name }}</td>
+          <td>{{ collection.item_price }}</td>
+          <td>{{ collection.private }}</td>        
+      </tr>
+  </tbody>
+</table>
+
+<button (click)="collectionAvbl()">Private/Public</button>

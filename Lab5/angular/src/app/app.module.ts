@@ -20,6 +20,7 @@ import { CreateComponent } from './components/create/create.component';
 import { EditComponent } from './components/edit/edit.component';
 import { IndexComponent } from './components/index/index.component';
 import { UsersComponent } from './components/users/users.component';
+import { CollectionsComponent } from './components/collections/collections.component';
 
 const appRoutes: Routes =  [
   {path:'', component: HomeComponent},
@@ -31,7 +32,8 @@ const appRoutes: Routes =  [
   {path:'admin/addItem', component: CreateComponent},
   {path:'admin/viewItem',component: IndexComponent},
   {path:'admin/editItem/:id',component: EditComponent},
-  {path:'admin/viewUsers', component: UsersComponent}
+  {path:'admin/viewUsers', component: UsersComponent},
+  {path:'user/showCollection', component: CollectionsComponent}
 ]
 
 @NgModule({
@@ -47,7 +49,8 @@ const appRoutes: Routes =  [
     CreateComponent,
     EditComponent,
     IndexComponent,
-    UsersComponent
+    UsersComponent,
+    CollectionsComponent
   ],
   imports: [
     BrowserModule,

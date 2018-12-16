@@ -93,6 +93,31 @@ export class AuthService {
       .map(res => res.json());
   }
 
+  addToCollection(id){
+    console.log(JSON.parse(localStorage.getItem('user')))
+    let user_id = JSON.parse(localStorage.getItem('user'))
+    const uri = 'http://localhost:3000/users/collection/' +id
+    return this.http.post(uri,user_id).map(res => res.json())
+  }
+
+  showCollection(){
+    let user_id = JSON.parse(localStorage.getItem('user'));
+    const uri = 'http://localhost:3000/users/showcollection';
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.post(uri, user_id, {headers: headers})
+      .map(res => res.json());
+  }
+
+  collectionAvbl(array){
+    let user_id = JSON.parse(localStorage.getItem('user'));
+    const uri = 'http://localhost:3000/users/changeCollection';
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.put(uri, array, {headers: headers})
+      .map(res => res.json());
+  }
+
   storeUserData(token, user){
     localStorage.setItem('id_token', token);
     localStorage.setItem('user', JSON.stringify(user));

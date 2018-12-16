@@ -6,6 +6,7 @@ const config = require('../config/database');
 const User = require('../models/user');
 const Admin = require('../models/admin');
 const Item = require('../models/items');
+const Collection = require('../models/collection');
 
 // Register Users
 router.post('/register', (req, res, next) => {
@@ -68,14 +69,79 @@ router.post('/authenticate', (req, res, next) => {
 
 //show cart for user
 router.post('/cart', function(req,res){
-  console.log(req.body[0].id)
+  var array = []
   for(var i=0; i<req.body.length; i++){
-    Item.findById(req.body[i].id), function(err,item){
+    var id = req.body[i].id
+    Item.findById(id, function(err,item){
+      console.log(item)
       if(err) res.json(err);
       else 
-      {res.json({item})
-      console.log(item)}
+      { array.push({item})}
+    })
+  }
+    console.log(array)
+    res.json({array})
+})
+
+//collection
+router.post('/collection/:id', function(req,res){
+  let id = req.body.id
+  Item.findById(req.params.id, function(err,item){
+    let newCollection = new Collection({
+     item_name : item.item_name,
+     item_price : item.item_price,
+     user_id : id,
+     private : false
+    });
+
+    Collection.addItem(newCollection, (err, item) => {
+      if(err){
+        res.json({success: false, msg:'Failed to add item'});
+      } else {
+        res.json({success: true, msg:'Item added'});
+      }
+    });
+  })
+})
+
+//show collection
+router.post('/showcollection', function(req,res){
+  let id = req.body.id;
+  let array = []
+  Collection.find({ "user_id": id }, function(err, collection){
+    if(err){
+      res.json({success: false, msg: 'Failed'});
+    } else {
+      array.push(collection)
+      res.json({array})
     }
+  })
+})
+
+//Public/Private Collection
+router.put('/changeCollection', function(req,res){
+  for(var i=0;i<req.body.length;i++){
+    Collection.findById(req.body[i], function(err,coll){
+      if (err)
+        res.json({success: false, msg:'Failed'});
+      else {
+        coll.item_name = coll.item_name;
+        coll.item_price = coll.item_price;
+        if(coll.private == false){
+          coll.private = true;
+        }else{
+          coll.private = false;
+        }
+        coll.user_id = coll.user_id;
+
+        coll.save().then(coll => {
+            res.json('Update complete');
+        })
+        .catch(err => {
+            res.status(400).send("unable to update the database");
+        });
+      }
+    })
   }
 })
 
@@ -83,11 +149,9 @@ router.post('/cart', function(req,res){
 router.post('/authenticate/admin', (req, res, next) => {
   const admin_username = req.body.admin_username;
   const admin_password = req.body.admin_password;
-  // console.log("abcd")
 
   Admin.getUserByUsername(admin_username, (err, admin) => {
     if(err) throw err;
-    // console.log(admin_username,admin,req.body.admin_username)
     if(!admin){
       return res.json({success: false, msg: 'User not found'});
     }
@@ -152,7 +216,6 @@ router.get('/authenticate/viewUsers', function (req, res) {
      console.log(err);
    }
    else {
-    //  console.log(users)
      res.json({users});
    }
  });
@@ -168,7 +231,6 @@ router.get('/authenticate/admin/editItem/:id', function(req,res){
 
 //update item
 router.post('/authenticate/admin/updateItem/:id', function(req,res,next){
-  // console.log(req.params.id, "id")
   Item.findById(req.params.id, function(err, item) {
     if (!item)
       return next(new Error('Could not load Document'));

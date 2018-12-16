@@ -30,7 +30,6 @@ export class CreateComponent implements OnInit {
     }
 
     this.authService.addItem(item).subscribe(data => {
-      console.log(data, item)
       if(data.success){
         this.flashMessage.show('Item has added', {
           cssClass: 'alert-success',
