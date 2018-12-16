@@ -34,6 +34,13 @@ export class DashboardComponent implements OnInit {
     var qty = (<HTMLInputElement>document.getElementById("qty_entered"+id)).value
     this.added.push({"id": id,"qty": qty})
     console.log(this.added)
+    this.addToFreq(id)
+  }
+
+  addToFreq(id){
+    this.authService.addToFreq(id).subscribe(res => {
+      console.log(res)
+    })
   }
 
   showCart(){

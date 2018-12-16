@@ -14,6 +14,7 @@ export class CreateComponent implements OnInit {
   item_quantity: String;
   item_price: String;
   item_tax: String;
+  item_desc: String;
 
   constructor(
     private authService:AuthService,
@@ -26,7 +27,8 @@ export class CreateComponent implements OnInit {
       item_name :  this.item_name,
       item_quantity : this.item_quantity,
       item_price : this.item_price,
-      item_tax : this.item_tax
+      item_tax : this.item_tax,
+      item_desc : this.item_desc
     }
 
     this.authService.addItem(item).subscribe(data => {

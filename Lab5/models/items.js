@@ -15,6 +15,13 @@ var ItemSchema = new Schema({
   },
   item_tax: {
     type: Number
+  },
+  item_desc: {
+    type: String
+  },
+  item_freq: {
+    type: Number,
+    default: 0
   }
 },{
     collection: 'items'
@@ -38,16 +45,10 @@ module.exports.getItems = function(item, res){
 }
 
 module.exports.updateItem = function(item, req, callback){
-  // console.log(callback,"callback", url.URL)
   Item.findById(req.params.id, function(err, item) {
     if (!item)
       return next(new Error('Could not load Document'));
     else {
-      // item.item_name = req.body.item_name;
-      // item.item_price = req.body.item_price;
-      // item.item_quantity = req.body.item_quantity;
-      // item.item_tax = req.body.item_tax;
-
       item.save(callback).then(item => {
         res.json('Update complete');
       })

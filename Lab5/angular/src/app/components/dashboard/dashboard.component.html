@@ -11,6 +11,7 @@
       <td style="border: solid">Item Price</td>
       <td style="border: solid">Available Quantity</td>
       <td style="border: solid">Item Tax</td>
+      <td style="border: solid">Item Description</td>
       <td style="border: solid">Quantity</td>
       <td colspan="2" style="border: solid">Action</td>
   </tr>
@@ -22,6 +23,7 @@
           <td style="border: solid">{{ item.item_price }}</td>
           <td style="border: solid">{{ item.item_quantity }}</td>
           <td style="border: solid">{{ item.item_tax }}</td>
+          <td style="border: solid">{{ item.item_desc }}</td>
           <td style="border: solid"><input type="number" name="qty_entered" value=1 id="{{ 'qty_entered' + item._id }}"></td>
           <td style="border: solid"><button (click)="addToCart(item._id)">Add to cart</button></td>
           <td style="border: solid"><button (click)="addToCollection(item._id)">Add to Collection</button></td>

@@ -14,6 +14,9 @@ const CollectionSchema = mongoose.Schema({
     },
     private: {
         type: Boolean,
+    },
+    description: {
+        type: String
     }
     },{
         collection: 'collection'

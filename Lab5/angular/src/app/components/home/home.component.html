@@ -1,6 +1,5 @@
 <div class="jumbotron text-center">
   <h1>Shopping App</h1>
-  <p class="lead">Welcome to our shopping web application</p>
   <div>
     <ul>
       <li>
@@ -11,6 +10,14 @@
       </li>
       <li>
         <a class="btn btn-default" [routerLink]="['/admin']">Manager Login</a>
+      </li>
+    </ul>
+  </div>
+  <p class="lead">Welcome to our shopping web application. Here you can buy different products. Below are some popular set of products for you to take a look at.</p>
+  <div>
+    <ul *ngFor="let item of items">
+      <li>{{item.item_name}}
+        <p>{{item.item_desc}}</p>
       </li>
     </ul>
   </div>

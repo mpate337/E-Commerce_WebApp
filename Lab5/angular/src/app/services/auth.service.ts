@@ -79,6 +79,11 @@ export class AuthService {
     return this.http.post(uri, param).map(res => res.json());
   }
 
+  addToFreq(id){
+    const uri = 'http://localhost:3000/users/counter/'+id;
+    return this.http.post(uri,'').map(res => res.json());
+  }
+
   deactivateUser(id){
     let headers = new Headers();
     headers.append('Content-Type','application/json');

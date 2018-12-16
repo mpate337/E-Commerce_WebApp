@@ -73,14 +73,13 @@ router.post('/cart', function(req,res){
   for(var i=0; i<req.body.length; i++){
     var id = req.body[i].id
     Item.findById(id, function(err,item){
-      console.log(item)
       if(err) res.json(err);
-      else 
-      { array.push({item})}
+      else{ 
+        array.push(item)
+        console.log(item)
+        res.json({array})}
     })
   }
-    console.log(array)
-    res.json({array})
 })
 
 //collection
@@ -184,7 +183,8 @@ router.post('/authenticate/addItem', (req, res, next) => {
     item_name: req.body.item_name,
     item_quantity: req.body.item_quantity,
     item_price: req.body.item_price,
-    item_tax: req.body.item_tax
+    item_tax: req.body.item_tax,
+    item_desc: req.body.item_desc
   });
 
   Item.addItem(item, (err, item) => {
@@ -239,6 +239,7 @@ router.post('/authenticate/admin/updateItem/:id', function(req,res,next){
       item.item_price = req.body.item_price;
       item.item_quantity = req.body.item_quantity;
       item.item_tax = req.body.item_tax;
+      item.item_desc = req.body.item_desc;
 
       item.save().then(item => {
           res.json('Update complete');
@@ -248,6 +249,29 @@ router.post('/authenticate/admin/updateItem/:id', function(req,res,next){
       });
     }
   });
+})
+
+//Counter
+router.post('/counter/:id', function(req,res,next){
+  Item.findById(req.params.id, function(err,item){
+    if(!item){
+      res.json({success: false, msg: 'Failed'})
+    }else{
+      item.item_name = item.item_name;
+      item.item_price = item.item_price;
+      item.item_quantity = item.item_quantity;
+      item.item_tax = item.item_tax;
+      item.item_desc = item.item_desc;
+      item.item_freq = item.item_freq + 1;
+
+      item.save().then(item => {
+        res.json('Update complete');
+      })
+      .catch(err => {
+        res.status(400).send("unable to update the database");
+      });
+    }
+  })
 })
 
 //Delete Item
