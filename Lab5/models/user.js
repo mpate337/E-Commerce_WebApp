@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+var crypto = require('crypto');
+var nodemailer = require('nodemailer');
+var Token = require('./token');
 const config = require('../config/database');
 
 // User Schema
@@ -47,6 +50,16 @@ module.exports.addUser = function(newUser, callback){
       newUser.save(callback);
     });
   });
+  var token = new Token({ _userId: newUser._id, token: crypto.randomBytes(16).toString('hex') });
+          // Save the verification token
+          token.save(function (err) {
+              if (err) { return res.status(500).send({ msg: err.message }); }
+  
+              // Send the email
+              var transporter = nodemailer.createTransport({ host:'smtp.gmail.com', port: '465', auth: { user: 'mpatel260197@gmail.com', pass: 'no body can open it26' } });
+              var mailOptions = { from: 'no-reply@yourwebapplication.com', to: newUser.email, subject: 'Account Verification Token', text: 'Hello,\n\n' + 'Please verify your account by clicking the link: \nhttp:\/\/\/confirmation\/' + token.token + '.\n' };
+              transporter.sendMail(mailOptions, function (err, info) { console.log(err, transporter) });
+            });
 }
 
 module.exports.comparePassword = function(candidatePassword, hash, callback){

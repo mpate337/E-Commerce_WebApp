@@ -2,11 +2,13 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
+var santizer = require('sanitize')();
 const config = require('../config/database');
 const User = require('../models/user');
 const Admin = require('../models/admin');
 const Item = require('../models/items');
 const Collection = require('../models/collection');
+const Token = require('../models/token');
 
 // Register Users
 router.post('/register', (req, res, next) => {
@@ -17,13 +19,20 @@ router.post('/register', (req, res, next) => {
     password: req.body.password
   });
 
-  User.addUser(newUser, (err, user) => {
-    if(err){
-      res.json({success: false, msg:'Failed to register user'});
-    } else {
-      res.json({success: true, msg:'User registered'});
+  User.findOne({"email": req.body.email}, function(err, output){
+    // console.log(output.email)
+    if(!output){
+      User.addUser(newUser, (err, user) => {
+        if(err){
+          res.json({success: false, msg:'Failed to register user'});
+        } else {
+          res.json({success: true, msg:'User registered'});
+        }
+      });
+    }else{
+      res.json({success: false, msg:'Email already taken'});
     }
-  });
+  })
 });
 
 // Authenticate User
