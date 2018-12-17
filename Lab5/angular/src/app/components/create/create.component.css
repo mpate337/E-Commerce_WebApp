@@ -4,3 +4,9 @@ li{
 .form-group{
     margin-bottom: 2%;
 }
+.body{
+    padding-left:1%;
+    background: bisque;
+    margin-top:1%;
+    padding-bottom: 1%;
+}

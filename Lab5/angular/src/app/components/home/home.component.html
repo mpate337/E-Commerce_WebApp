@@ -1,25 +1,25 @@
-<div class="jumbotron text-center">
+<body>
+  <div class="title">
   <h1>Shopping App</h1>
   <div>
-    <ul>
-      <li>
-        <a class="btn btn-primary" [routerLink]="['/register']">Register</a> 
-      </li>
-      <li>
-        <a class="btn btn-default" [routerLink]="['/login']">Login</a>
-      </li>
-      <li>
-        <a class="btn btn-default" [routerLink]="['/admin']">Manager Login</a>
-      </li>
-    </ul>
+      <div class="links">
+        <span id="register" [routerLink]="['/register']">Register</span> 
+      </div>
+      <div class="links">
+        <span id="login" [routerLink]="['/login']">Login</span>
+      </div>
+      <div class="links">
+        <span id="manager" [routerLink]="['/admin']">Manager Login</span>
+      </div>
   </div>
-  <p class="lead">Welcome to our shopping web application. Here you can buy different products. Below are some popular set of products for you to take a look at.</p>
-  <div>
-    <ul *ngFor="let item of items">
-      <li>{{item.item_name}}
-        <p>{{item.item_desc}}</p>
-      </li>
-    </ul>
+  <p class="info">Welcome to our shopping web application. Here you can buy different products. Below are some popular set of products for you to take a look at.</p>
+  <div class="items">
+    <div class="margin" *ngFor="let item of items">
+      <span class="name">{{item.item_name}}
+        <p class="desc">{{item.item_desc}}</p>
+      </span>
+    </div>
   </div>
 </div>
+</body>
 

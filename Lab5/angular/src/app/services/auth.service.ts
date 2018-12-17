@@ -4,9 +4,9 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class AuthService {
-  authToken: any;
   user: any;
   admin: any;
+  token: any;
 
   constructor(private http:Http) { }
 
@@ -34,22 +34,8 @@ export class AuthService {
   storeAdminData(token, admin){
     localStorage.setItem('id_tokenAdmin', token);
     localStorage.setItem('admin', JSON.stringify(admin));
-    this.authToken = token;
+    this.token = token;
     this.admin = admin;
-  }
-
-  addItem(item){
-    let headers = new Headers();
-    headers.append('Content-Type','application/json');
-    return this.http.post('http://localhost:3000/users/authenticate/addItem', item,{headers: headers})
-      .map(res => res.json());
-  }
-
-  getItems(){
-    let headers = new Headers();
-    headers.append('Content-Type','application/json');
-    return this.http.get('http://localhost:3000/users/authenticate/viewItem', {headers: headers})
-      .map(res => res.json());
   }
 
   getUsers(){
@@ -57,31 +43,6 @@ export class AuthService {
     headers.append('Content-Type','application/json');
     return this.http.get('http://localhost:3000/users/authenticate/viewUsers', {headers: headers})
       .map(res => res.json());
-  }
-
-  editItem(id) {
-    const uri = 'http://localhost:3000/users/authenticate/admin/editItem/' + id;
-    return this.http.get(uri).map(res => res.json());
-  }
-
-  updateItem(item, id){
-    const uri = 'http://localhost:3000/users/authenticate/admin/updateItem/' + id;
-    return this.http.post(uri, item).map(res => res.json());
-  }
-
-  deleteItem(id){
-    const uri = 'http://localhost:3000/users/admin/deleteItem/' + id;
-    return this.http.get(uri).map(res => res.json());
-  }
-
-  showCart(param){
-    const uri = 'http://localhost:3000/users/cart';
-    return this.http.post(uri, param).map(res => res.json());
-  }
-
-  addToFreq(id){
-    const uri = 'http://localhost:3000/users/counter/'+id;
-    return this.http.post(uri,'').map(res => res.json());
   }
 
   deactivateUser(id){
@@ -101,38 +62,73 @@ export class AuthService {
   addToCollection(id){
     console.log(JSON.parse(localStorage.getItem('user')))
     let user_id = JSON.parse(localStorage.getItem('user'))
-    const uri = 'http://localhost:3000/users/collection/' +id
-    return this.http.post(uri,user_id).map(res => res.json())
+    const url = 'http://localhost:3000/users/collection/' +id
+    return this.http.post(url,user_id).map(res => res.json())
   }
 
   showCollection(){
     let user_id = JSON.parse(localStorage.getItem('user'));
-    const uri = 'http://localhost:3000/users/showcollection';
+    const url = 'http://localhost:3000/users/showcollection';
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    return this.http.post(uri, user_id, {headers: headers})
+    return this.http.post(url, user_id, {headers: headers})
       .map(res => res.json());
   }
 
   collectionAvbl(array){
     let user_id = JSON.parse(localStorage.getItem('user'));
-    const uri = 'http://localhost:3000/users/changeCollection';
+    const url = 'http://localhost:3000/users/changeCollection';
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    return this.http.put(uri, array, {headers: headers})
+    return this.http.put(url, array, {headers: headers})
       .map(res => res.json());
   }
 
   storeUserData(token, user){
     localStorage.setItem('id_token', token);
     localStorage.setItem('user', JSON.stringify(user));
-    this.authToken = token;
+    this.token = token;
     this.user = user;
   }
 
   logout(){
-    this.authToken = null;
+    this.token = null;
     this.user = null;
     localStorage.clear();
+  }
+
+  addItem(item){
+    return this.http.post('http://localhost:3000/users/authenticate/addItem', item)
+      .map(res => res.json());
+  }
+
+  getItems(){
+    return this.http.get('http://localhost:3000/users/authenticate/viewItem')
+      .map(res => res.json());
+  }
+
+  editItem(id) {
+    const url = 'http://localhost:3000/users/authenticate/admin/editItem/' + id;
+    return this.http.get(url).map(res => res.json());
+  }
+
+  updateItem(item, id){
+    const url = 'http://localhost:3000/users/authenticate/admin/updateItem/' + id;
+    return this.http.post(url, item).map(res => res.json());
+  }
+
+  deleteItem(id){
+    const url = 'http://localhost:3000/users/admin/deleteItem/' + id;
+    return this.http.get(url).map(res => res.json());
+  }
+
+  showCart(param){
+    const url = 'http://localhost:3000/users/cart';
+    return this.http.post(url, param).map(res => res.json());
+  }
+
+  addToFreq(id){
+    const url = 'http://localhost:3000/users/counter/'+id;
+    return this.http.post(url,'').map(res => res.json());
   }
 }

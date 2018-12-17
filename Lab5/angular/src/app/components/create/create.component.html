@@ -1,38 +1,38 @@
+<div class="body">
 <div>
-  <ul>
-    <li>
+    <div>
       <a [routerLink]="['/admin/viewItem']">View Items</a>
-    </li>
-    <li>
+    </div>
+    <div>
       <a [routerLink]="['/admin/addItem']">Add Item</a>
-    </li>
-    <li>
+    </div>
+    <div>
       <a [routerLink]="['/admin/viewUsers']">View Users</a>
-    </li>
-  </ul>
+    </div>
 </div>
 
-<h2 class="page-header">Add Item</h2>
+<h2>Add Item</h2>
 <form (submit)="addItem()">
   <div class="form-group">
     <label>Item Name : </label>
-    <input type="text" class="form-control" [(ngModel)]="item_name" name="item_name">
+    <input type="text" [(ngModel)]="item_name" name="item_name">
   </div>
   <div class="form-group">
     <label>Item Quantity : </label>
-    <input type="text" class="form-control" [(ngModel)]="item_quantity" name="item_quantity">
+    <input type="text"  [(ngModel)]="item_quantity" name="item_quantity">
   </div>
   <div class="form-group">
       <label>Item Price : </label>
-      <input type="text" class="form-control" [(ngModel)]="item_price" name="item_price">
+      <input type="text"  [(ngModel)]="item_price" name="item_price">
   </div>
   <div class="form-group">
     <label>Item Description : </label>
-    <input type="text" class="form-control" [(ngModel)]="item_desc" name="item_desc">
+    <input type="text"  [(ngModel)]="item_desc" name="item_desc">
 </div>
   <div class="form-group">
       <label>Item Tax : </label>
-      <input type="text" class="form-control" [(ngModel)]="item_tax" name="item_tax">
+      <input type="text"  [(ngModel)]="item_tax" name="item_tax">
   </div>
-  <input type="submit" class="btn btn-primary" value="Add Item">
+  <input type="submit" value="Add Item">
 </form>
+</div>

@@ -1,18 +1,18 @@
-<div>
-  <ul>
-      <li>
-          <a [routerLink]="['/admin/viewItem']">View Items</a>
-      </li>
-      <li>
-          <a [routerLink]="['/admin/addItem']">Add Item</a>
-      </li>
-      <li>
-          <a [routerLink]="['/admin/viewUsers']">View Users</a>
-      </li>
-  </ul>
-</div>
 
-<table class="table table-hover" style="border: solid 2px; margin-top: 10px; background-color: bisque">
+<div class="body">
+    <div style="margin-bottom: 14px; padding-top: 14px;">
+      <div>
+          <a [routerLink]="['/admin/viewItem']">View Items</a>
+      </div>
+      <div>
+          <a [routerLink]="['/admin/addItem']">Add Item</a>
+      </div>
+      <div>
+          <a [routerLink]="['/admin/viewUsers']">View Users</a>
+      </div>
+    </div>
+
+<table class="table table-hover">
 <thead style="border: solid">
 <tr style="font-weight: bold">
     <td style="border: solid"> ID</td>
@@ -36,3 +36,4 @@
     </tr>
 </tbody>
 </table>
+</div>

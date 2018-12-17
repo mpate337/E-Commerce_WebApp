@@ -1,0 +1,23 @@
+#navbar{
+    display: inline-flex;
+    width: 100%;
+    font-size: 20px;
+    background: lightgray;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    color: blue;
+}
+#logout{
+    width: 50%;
+    text-align-last: end;
+    margin-right: 3%;
+    cursor: pointer;
+}
+#bb:hover, #aa:hover{
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+#home{
+    width: 50%;
+    margin-left: 2%;
+    cursor: pointer;
+}

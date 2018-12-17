@@ -4,11 +4,10 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 var santizer = require('sanitize')();
 const config = require('../config/database');
-const User = require('../models/user');
-const Admin = require('../models/admin');
 const Item = require('../models/items');
 const Collection = require('../models/collection');
-const Token = require('../models/token');
+const User = require('../models/user');
+const Admin = require('../models/admin');
 
 // Register Users
 router.post('/register', (req, res, next) => {
@@ -20,17 +19,16 @@ router.post('/register', (req, res, next) => {
   });
 
   User.findOne({"email": req.body.email}, function(err, output){
-    // console.log(output.email)
     if(!output){
       User.addUser(newUser, (err, user) => {
         if(err){
           res.json({success: false, msg:'Failed to register user'});
         } else {
-          res.json({success: true, msg:'User registered'});
+          res.json({success: true, msg:'User registered successfully'});
         }
       });
     }else{
-      res.json({success: false, msg:'Email already taken'});
+      res.json({success: false, msg:'Email already existing'});
     }
   })
 });
@@ -55,7 +53,7 @@ router.post('/authenticate', (req, res, next) => {
 
         if(user.activate == false){
           res.json({
-            success: false, msg: 'Your Account is Deactivated, please contact store manager.'
+            success: false, msg: 'Your Account is Deactivated because of some reason, for further inquiry please contact store manager.'
           });
         }
 
@@ -104,9 +102,9 @@ router.post('/collection/:id', function(req,res){
 
     Collection.addItem(newCollection, (err, item) => {
       if(err){
-        res.json({success: false, msg:'Failed to add item'});
+        res.json({success: false, msg:'Failed to add item to collection'});
       } else {
-        res.json({success: true, msg:'Item added'});
+        res.json({success: true, msg:'Item added to collection'});
       }
     });
   })
@@ -118,7 +116,7 @@ router.post('/showcollection', function(req,res){
   let array = []
   Collection.find({ "user_id": id }, function(err, collection){
     if(err){
-      res.json({success: false, msg: 'Failed'});
+      res.json({success: false, msg: 'Failed!!'});
     } else {
       array.push(collection)
       res.json({array})
@@ -131,7 +129,7 @@ router.put('/changeCollection', function(req,res){
   for(var i=0;i<req.body.length;i++){
     Collection.findById(req.body[i], function(err,coll){
       if (err)
-        res.json({success: false, msg:'Failed'});
+        res.json({success: false, msg:'Failed!!'});
       else {
         coll.item_name = coll.item_name;
         coll.item_price = coll.item_price;
@@ -143,7 +141,7 @@ router.put('/changeCollection', function(req,res){
         coll.user_id = coll.user_id;
 
         coll.save().then(coll => {
-            res.json('Update complete');
+            res.json('Update completed');
         })
         .catch(err => {
             res.status(400).send("unable to update the database");
@@ -161,7 +159,7 @@ router.post('/authenticate/admin', (req, res, next) => {
   Admin.getUserByUsername(admin_username, (err, admin) => {
     if(err) throw err;
     if(!admin){
-      return res.json({success: false, msg: 'User not found'});
+      return res.json({success: false, msg: 'Admin not found in database'});
     }
 
     Admin.comparePassword(admin_password, admin.admin_password, (err, isMatch) => {
@@ -338,10 +336,5 @@ router.post('/admin/deactivate/:id', function (req,res,next) {
     }
   })
 })
-
-// Profile
-router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res, next) => {
-  res.json({user: req.user});
-});
 
 module.exports = router;

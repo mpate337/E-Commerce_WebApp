@@ -27,5 +27,14 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/']);
     return false;
   }
+  onHomeClick(){
+    var user = JSON.parse(localStorage.getItem('user'))
+    console.log('user', user)
+    if(!user){
+      this.router.navigate(['/'])
+    }else{
+      this.router.navigate(['/dashboard'])
+    }
+  }
 
 }
