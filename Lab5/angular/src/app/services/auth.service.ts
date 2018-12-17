@@ -41,7 +41,7 @@ export class AuthService {
   getUsers(){
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    return this.http.get('http://localhost:3000/users/authenticate/viewUsers', {headers: headers})
+    return this.http.get('http://localhost:3000/users/admin/viewUsers', {headers: headers})
       .map(res => res.json());
   }
 
@@ -98,22 +98,22 @@ export class AuthService {
   }
 
   addItem(item){
-    return this.http.post('http://localhost:3000/users/authenticate/addItem', item)
+    return this.http.post('http://localhost:3000/users/admin/addItem', item)
       .map(res => res.json());
   }
 
   getItems(){
-    return this.http.get('http://localhost:3000/users/authenticate/viewItem')
+    return this.http.get('http://localhost:3000/users/admin/viewItem')
       .map(res => res.json());
   }
 
   editItem(id) {
-    const url = 'http://localhost:3000/users/authenticate/admin/editItem/' + id;
+    const url = 'http://localhost:3000/users/admin/editItem/' + id;
     return this.http.get(url).map(res => res.json());
   }
 
   updateItem(item, id){
-    const url = 'http://localhost:3000/users/authenticate/admin/updateItem/' + id;
+    const url = 'http://localhost:3000/users/admin/updateItem/' + id;
     return this.http.post(url, item).map(res => res.json());
   }
 

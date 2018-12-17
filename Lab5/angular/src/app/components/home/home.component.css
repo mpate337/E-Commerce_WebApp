@@ -1,6 +1,7 @@
-body{
+.body{
     background: bisque;
-    margin: 0% !important;
+    padding: 22px;
+    height: -webkit-fill-available
 }
 .title{
     font-size: 16px;
@@ -18,13 +19,18 @@ h1{
 .name{
     cursor: pointer;
     font-size: 20px;
+    color: dimgray;
 }
 .desc{
     display: none;
     font-size: 14px;
 }
 .links{
-    margin-bottom: 1%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    display: inline-flex;
+    width: 100%;
+    font-size: 22px;
 }
 ul{
     padding-inline-start: 0%;
@@ -33,9 +39,20 @@ ul{
 #manager, #login, #register{
     color: blue;
     cursor: pointer;
+    width: 33%
+}
+#register{
+    text-align: left;
+}
+#manager{
+    text-align: right;
+}
+#login{
+    text-align: center;
 }
 #manager:hover, #login:hover, #register:hover{
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    font-size: 26px;
 }
 .name:hover .desc{
     display: block;

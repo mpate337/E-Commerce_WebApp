@@ -185,7 +185,7 @@ router.post('/authenticate/admin', (req, res, next) => {
 });
 
 // Add Item
-router.post('/authenticate/addItem', (req, res, next) => {
+router.post('/admin/addItem', (req, res, next) => {
   let item = new Item({
     item_name: req.body.item_name,
     item_quantity: req.body.item_quantity,
@@ -205,7 +205,7 @@ router.post('/authenticate/addItem', (req, res, next) => {
 
 
 //Get Items
-router.get('/authenticate/viewItem', function (req, res) {
+router.get('/admin/viewItem', function (req, res) {
   Item.find(function (err, items){
    if(err){
      console.log(err);
@@ -217,7 +217,7 @@ router.get('/authenticate/viewItem', function (req, res) {
 });
 
 //Get Users
-router.get('/authenticate/viewUsers', function (req, res) {
+router.get('/admin/viewUsers', function (req, res) {
   User.find(function (err, users){
    if(err){
      console.log(err);
@@ -229,7 +229,7 @@ router.get('/authenticate/viewUsers', function (req, res) {
 });
 
 //Edit item
-router.get('/authenticate/admin/editItem/:id', function(req,res){
+router.get('/admin/editItem/:id', function(req,res){
   var id = req.params.id;
   Item.findById(id, function(err,item){
     res.json(item);
@@ -237,7 +237,7 @@ router.get('/authenticate/admin/editItem/:id', function(req,res){
 })
 
 //update item
-router.post('/authenticate/admin/updateItem/:id', function(req,res,next){
+router.post('/admin/updateItem/:id', function(req,res,next){
   Item.findById(req.params.id, function(err, item) {
     if (!item)
       return next(new Error('Could not load Document'));

@@ -1,16 +1,15 @@
-<body>
-  <div class="title">
+<div class="body">
   <h1>Shopping App</h1>
-  <div>
-      <div class="links">
-        <span id="register" [routerLink]="['/register']">Register</span> 
-      </div>
-      <div class="links">
-        <span id="login" [routerLink]="['/login']">Login</span>
-      </div>
-      <div class="links">
-        <span id="manager" [routerLink]="['/admin']">Manager Login</span>
-      </div>
+  <div class="links">
+      <span id="register">
+        <span [routerLink]="['/register']">Register</span> 
+      </span>
+      <span id="login">
+        <span [routerLink]="['/login']">Login</span>
+      </span>
+      <span id="manager">
+        <span [routerLink]="['/admin']">Manager Login</span>
+      </span>
   </div>
   <p class="info">Welcome to our shopping web application. Here you can buy different products. Below are some popular set of products for you to take a look at.</p>
   <div class="items">
@@ -21,5 +20,4 @@
     </div>
   </div>
 </div>
-</body>
 
