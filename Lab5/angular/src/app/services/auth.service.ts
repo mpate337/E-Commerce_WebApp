@@ -131,4 +131,10 @@ export class AuthService {
     const url = 'http://localhost:3000/users/counter/'+id;
     return this.http.post(url,'').map(res => res.json());
   }
+
+  rating(id, stars){
+    console.log(stars)
+    const url = 'http://localhost:3000/users/rating/'+id;
+    return this.http.post(url, stars).map(res => res.json());
+  }
 }

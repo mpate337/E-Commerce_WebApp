@@ -15,7 +15,9 @@
   <div class="items">
     <div class="margin" *ngFor="let item of items">
       <span class="name">{{item.item_name}}
-        <p class="desc">{{item.item_desc}}</p>
+        <p class="desc">Description : {{item.item_desc}}</p>
+        <p class="desc">Price : {{item.item_price}} $</p>
+        <p class="desc">Average Rating : {{item.item_stars}} ({{item.rating_frequency}})</p>
       </span>
     </div>
   </div>

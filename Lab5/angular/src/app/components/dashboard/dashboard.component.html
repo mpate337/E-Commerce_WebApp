@@ -1,34 +1,38 @@
-<ul>
-    <li>
-        <a [routerLink]="['/user/showCollection']">View Collection</a>
-    </li>
-</ul>
+<div class="body">
+<!-- <ul>
+    <a [routerLink]="['/user/showCollection']">View Collection</a>
+</ul> -->
 
 <table class="table table-hover">
-  <thead style="border: solid">
+  <thead >
   <tr style="font-weight: bold">
-      <td style="border: solid">Item Name</td>
-      <td style="border: solid">Item Price</td>
-      <td style="border: solid">Available Quantity</td>
-      <td style="border: solid">Item Tax</td>
-      <td style="border: solid">Item Description</td>
-      <td style="border: solid">Quantity</td>
-      <td colspan="2" style="border: solid">Action</td>
+      <th id="heading">Item Name</th>
+      <th id="heading">Item Price</th>
+      <th id="heading">Available Quantity</th>
+      <th id="heading">Item Tax</th>
+      <th id="heading">Item Description</th>
+      <th id="heading">Item Rating</th>
+      <th id="heading">Quantity</th>
+      <th id="heading">Action</th>
+      <th id="heading">Action</th>
   </tr>
   </thead>
 
   <tbody>
       <tr *ngFor="let item of items">
-          <td style="border: solid">{{ item.item_name }}</td>
-          <td style="border: solid">{{ item.item_price }}</td>
-          <td style="border: solid">{{ item.item_quantity }}</td>
-          <td style="border: solid">{{ item.item_tax }}</td>
-          <td style="border: solid">{{ item.item_desc }}</td>
-          <td style="border: solid"><input type="number" name="qty_entered" value=1 id="{{ 'qty_entered' + item._id }}"></td>
-          <td style="border: solid"><button (click)="addToCart(item._id)">Add to cart</button></td>
-          <td style="border: solid"><button (click)="addToCollection(item._id)">Add to Collection</button></td>
-      </tr>
+          <td >{{ item.item_name }}</td>
+          <td >{{ item.item_price }}</td>
+          <td >{{ item.item_quantity }}</td>
+          <td >{{ item.item_tax }}</td>
+          <td >{{ item.item_desc }}</td>
+          <td >{{ item.item_stars }} ({{item.rating_frequency}})</td>
+          <td ><input type="number" class="button" name="qty_entered" value=1 id="{{ 'qty_entered' + item._id }}"></td>
+          <td ><button (click)="addToCart(item._id)">Add to cart</button></td>
+          <!-- <td ><button (click)="addToCollection(item._id)">Add to Collection</button></td> -->
+          <td style="padding-bottom: 0"><input type="number" class="ratecls" vale=1 id="{{ 'rate' + item._id}}"><button (click)="rating(item._id)">Rate Item</button></td>
+        </tr>
   </tbody>
 </table>
 
-<button (click)="showCart()">Show Cart</button>
+<button (click)="showCart()" style="margin-top: 3%; width: 20%; height: 40px">Show Cart</button>
+</div>

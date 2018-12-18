@@ -55,18 +55,18 @@ router.post('/authenticate', (req, res, next) => {
           res.json({
             success: false, msg: 'Your Account is Deactivated because of some reason, for further inquiry please contact store manager.'
           });
+        }else{
+          res.json({
+            success: true,
+            token: 'JWT '+token,
+            user: {
+              id: user._id,
+              name: user.name,
+              username: user.username,
+              email: user.email
+            }
+          });
         }
-
-        res.json({
-          success: true,
-          token: 'JWT '+token,
-          user: {
-            id: user._id,
-            name: user.name,
-            username: user.username,
-            email: user.email
-          }
-        });
       } else {
         return res.json({success: false, msg: 'Wrong password'});
       }
@@ -328,6 +328,42 @@ router.post('/admin/deactivate/:id', function (req,res,next) {
       }
 
       user.save().then(user => {
+        res.json('Update complete');
+      })
+      .catch(err => {
+        res.status(400).send("unable to update the database");
+      });
+    }
+  })
+})
+
+//Rate the item
+router.post('/rating/:id', function(req,res){
+  // console.log(req.body.stars)
+  Item.findById(req.params.id, function(err, item){
+    // console.log(typeof(item.rating_frequency))
+    if(!item){
+      return err;
+    }
+    else{
+      var freq = item.rating_frequency + 1;
+      item.item_name = item.item_name;
+      item.item_price = item.item_price;
+      item.item_quantity = item.item_quantity;
+      item.item_tax = item.item_tax;
+      item.item_desc = item.item_desc;
+      item.item_freq = item.item_freq;
+      if(item.rating_frequency == 0){
+      item.item_stars = req.body.stars;
+      item.rating_frequency = freq;
+      // console.log("if part", req.body.stars, freq, typeof(req.body.stars), typeof(freq))
+      }else{
+        var newRating = (item.item_stars + (parseInt(req.body.stars) * item.rating_frequency)) / freq;
+        item.item_stars = newRating.toFixed(2);
+        item.rating_frequency = freq;
+      }
+
+      item.save().then(item => {
         res.json('Update complete');
       })
       .catch(err => {

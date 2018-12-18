@@ -22,6 +22,13 @@ var ItemSchema = new Schema({
   item_freq: {
     type: Number,
     default: 0
+  },
+  item_stars: {
+    type: Number,
+  },
+  rating_frequency: {
+    type: Number,
+    default: 0
   }
 },{
     collection: 'items'
