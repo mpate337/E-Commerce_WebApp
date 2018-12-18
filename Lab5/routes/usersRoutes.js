@@ -282,7 +282,7 @@ router.post('/counter/:id', function(req,res,next){
 })
 
 //Delete Item
-router.get('/admin/deleteItem/:id', function(req,res){
+router.delete('/admin/deleteItem/:id', function(req,res){
   Item.findByIdAndRemove({_id: req.params.id}, function(err, item){
     if(err) res.json(err);
     else res.json('Successfully removed');
@@ -339,9 +339,7 @@ router.post('/admin/deactivate/:id', function (req,res,next) {
 
 //Rate the item
 router.post('/rating/:id', function(req,res){
-  // console.log(req.body.stars)
   Item.findById(req.params.id, function(err, item){
-    // console.log(typeof(item.rating_frequency))
     if(!item){
       return err;
     }
@@ -356,7 +354,6 @@ router.post('/rating/:id', function(req,res){
       if(item.rating_frequency == 0){
       item.item_stars = req.body.stars;
       item.rating_frequency = freq;
-      // console.log("if part", req.body.stars, freq, typeof(req.body.stars), typeof(freq))
       }else{
         var newRating = (item.item_stars + (parseInt(req.body.stars) * item.rating_frequency)) / freq;
         item.item_stars = newRating.toFixed(2);

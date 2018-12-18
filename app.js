@@ -24,7 +24,7 @@ const app = express();
 const users = require('./Lab5/routes/usersRoutes');
 
 // Port Number
-const port = 3000;
+const port = 3500;
 
 // CORS Middleware
 app.use(cors());

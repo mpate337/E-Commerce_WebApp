@@ -9,13 +9,15 @@ import {AuthService} from '../../services/auth.service';
 export class HomeComponent implements OnInit {
 
   items: any;
+  avblItem: any;
   constructor(
     private authService:AuthService,
   ) { }
 
   ngOnInit() {
     this.getItems();
-    this.items= []
+    this.items= [];
+    this.avblItem = []
   }
 
   getItems() {
@@ -26,12 +28,25 @@ export class HomeComponent implements OnInit {
         if(items.items[i].item_freq >= 5){
           this.items.push(items.items[i])
         }
+        if(items.items[i].item_quantity > 0){
+          this.avblItem.push(items.items[i])
+        }
       }
     },
     err => {
       console.log(err);
       return false;
     });
+  }
+
+  function(){
+    var x = document.getElementById("showme");
+    console.log(x.style.display )
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
   }
 
 }

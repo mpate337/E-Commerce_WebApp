@@ -21,6 +21,7 @@ table {
     flex: 1 1 20%;
     text-align: center;
     border: solid 1px;
+    word-break: break-all;
   }
   #heading{
     font-size: 20px;

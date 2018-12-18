@@ -1,7 +1,6 @@
 .body{
     background: bisque;
     padding: 22px;
-    height: -webkit-fill-available
 }
 .title{
     font-size: 16px;
@@ -18,7 +17,7 @@ h1{
 }
 .name{
     cursor: pointer;
-    font-size: 20px;
+    font-size: 22px;
     color: dimgray;
 }
 .desc{
@@ -58,4 +57,18 @@ ul{
 }
 .margin{
     margin-bottom: 2%;
+}
+#showme{
+    display: none;
+}
+#allItem{
+    font-size: 20px;
+    margin-bottom: 2%
+}
+#small{
+    font-size: 12px;
+}
+#clickhere{
+    color: blue;
+    cursor: pointer;
 }
