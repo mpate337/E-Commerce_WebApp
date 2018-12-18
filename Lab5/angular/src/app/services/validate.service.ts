@@ -18,6 +18,14 @@ export class ValidateService {
     return re.test(email);
   }
 
+  validatePassword(pass){
+    if(pass.length < 4){
+      return false;
+    }else{
+      return true;
+    }
+  }
+
   validateRating(rating){
     if(rating>=1 && rating <=5){
       return true;

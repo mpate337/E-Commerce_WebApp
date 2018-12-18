@@ -1,38 +1,38 @@
 <div class="body">
-<div>
-    <div>
-      <a [routerLink]="['/admin/viewItem']">View Items</a>
+    <div class="links">
+        <span id="register" [routerLink]="['/admin/viewItem']">
+          <span>View Items</span>
+        </span>
+        <span id="login" [routerLink]="['/admin/addItem']">
+            <span>Add Item</span>
+        </span>
+        <span id="manager" [routerLink]="['/admin/viewUsers']">
+            <span>View Users</span>
+        </span>
     </div>
-    <div>
-      <a [routerLink]="['/admin/addItem']">Add Item</a>
-    </div>
-    <div>
-      <a [routerLink]="['/admin/viewUsers']">View Users</a>
-    </div>
-</div>
 
-<h2>Add Item</h2>
+<h1>Add Values for an Item</h1>
 <form (submit)="addItem()">
   <div class="form-group">
     <label>Item Name : </label>
-    <input type="text" [(ngModel)]="item_name" name="item_name">
+    <input type="text" class="form-control" [(ngModel)]="item_name" name="item_name">
   </div>
   <div class="form-group">
     <label>Item Quantity : </label>
-    <input type="text"  [(ngModel)]="item_quantity" name="item_quantity">
+    <input type="text" class="form-control" [(ngModel)]="item_quantity" name="item_quantity">
   </div>
   <div class="form-group">
       <label>Item Price : </label>
-      <input type="text"  [(ngModel)]="item_price" name="item_price">
+      <input type="text" class="form-control" [(ngModel)]="item_price" name="item_price">
   </div>
   <div class="form-group">
     <label>Item Description : </label>
-    <input type="text"  [(ngModel)]="item_desc" name="item_desc">
+    <input type="text" class="form-control" [(ngModel)]="item_desc" name="item_desc">
 </div>
   <div class="form-group">
       <label>Item Tax : </label>
-      <input type="text"  [(ngModel)]="item_tax" name="item_tax">
+      <input type="text" class="form-control" [(ngModel)]="item_tax" name="item_tax">
   </div>
-  <input type="submit" value="Add Item">
+  <input type="submit" class="button" value="Add Item">
 </form>
 </div>

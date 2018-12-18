@@ -1,12 +1,55 @@
-li{
-    font-size: 18px;
+.body{
+    background: bisque;
+    padding: 22px;
+}
+h1{
+    margin-block-start: 0%;
+    text-align: center;
 }
 .form-group{
-    margin-bottom: 2%;
+    margin-bottom: 14px;
 }
-.body{
-    padding-left:1%;
-    background: bisque;
+.button{
+    width: 25%;
+    font-size: 20px;
+    cursor: pointer;
+    border: solid 1px #4CAF50;
+    vertical-align: middle;
+    margin-top: 2%
+}
+.button:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+.form-control{
+    width: -webkit-fill-available;
     margin-top:1%;
-    padding-bottom: 1%;
+    height: 20px;
+}
+label{
+    width: -webkit-fill-available;
+    font-size: 20px;
+}
+.links{
+    margin-bottom: 2%;
+    display: inline-flex;
+    width: 100%;
+    font-size: 22px;
+}
+#manager, #login, #register{
+    color: blue;
+    cursor: pointer;
+    width: 33%
+}
+#register{
+    text-align: left;
+}
+#manager{
+    text-align: right;
+}
+#login{
+    text-align: center;
+}
+#manager:hover, #login:hover, #register:hover{
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    font-size: 26px;
 }

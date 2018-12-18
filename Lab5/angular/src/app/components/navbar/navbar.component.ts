@@ -29,13 +29,13 @@ export class NavbarComponent implements OnInit {
   }
   
   onHomeClick(){
-    var user = JSON.parse(localStorage.getItem('id_token'))
-    var admin = JSON.parse(localStorage.getItem('id_tokenAdmin'))
-    console.log('user', user, admin)
-    if(user){
-      this.router.navigate(['/dashboard'])
-    }else if(admin){
-      this.router.navigate(['/admin/viewItem'])
+    console.log(localStorage.getItem('login'))
+    if(localStorage.getItem('login')){
+      if(localStorage.getItem('login') == 'user'){
+        this.router.navigate(['/dashboard'])
+      }else{
+        this.router.navigate(['/admin/viewItem'])
+      }
     }else{
       this.router.navigate(['/'])
     }

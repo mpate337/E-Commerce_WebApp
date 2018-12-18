@@ -32,6 +32,7 @@ export class AuthService {
   }
 
   storeAdminData(token, admin){
+    localStorage.setItem('login', 'admin')
     localStorage.setItem('id_tokenAdmin', token);
     localStorage.setItem('admin', JSON.stringify(admin));
     this.token = token;
@@ -60,7 +61,7 @@ export class AuthService {
   }
 
   addToCollection(id){
-    console.log(JSON.parse(localStorage.getItem('user')))
+    // console.log(JSON.parse(localStorage.getItem('user')))
     let user_id = JSON.parse(localStorage.getItem('user'))
     const url = 'http://localhost:3000/users/collection/' +id
     return this.http.post(url,user_id).map(res => res.json())
@@ -85,6 +86,7 @@ export class AuthService {
   }
 
   storeUserData(token, user){
+    localStorage.setItem('login', 'user')
     localStorage.setItem('id_token', token);
     localStorage.setItem('user', JSON.stringify(user));
     this.token = token;

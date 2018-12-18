@@ -1,4 +1,17 @@
-<h2 class="page-header">Edit Item</h2>
+<div class="body">
+    <div class="links">
+        <span id="register" [routerLink]="['/admin/viewItem']">
+            <span>View Items</span>
+        </span>
+        <span id="login" [routerLink]="['/admin/addItem']">
+            <span>Add Item</span>
+        </span>
+        <span id="manager" [routerLink]="['/admin/viewUsers']">
+            <span>View Users</span>
+        </span>
+    </div>
+
+<h1 >Edit Item</h1>
 <form (submit)="editItem()">
   <div class="form-group">
     <label>Item Name : </label>
@@ -20,5 +33,6 @@
       <label>Item Tax : </label>
       <input type="text" class="form-control" [(ngModel)]="item_tax" name="item_tax">
   </div>
-  <input type="submit" class="btn btn-primary" value="Edit Item">
+  <input type="submit" class="button" value="Edit Item">
 </form>
+</div>

@@ -45,6 +45,12 @@ export class RegisterComponent implements OnInit {
       return false;
     }
 
+    // Validating Passowrd Length
+    if(!this.validateService.validatePassword(user.password)){
+      this.flashMessage.show('Please choose a password of minimum 4 characters', {cssClass: 'alert-danger', timeout: 3000});
+      return false;
+    }
+
     // Register user
     this.authService.registerUser(user).subscribe(data => {
       if(data.success){

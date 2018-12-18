@@ -1,38 +1,39 @@
 
 <div class="body">
-    <div style="margin-bottom: 14px; padding-top: 14px;">
-      <div>
-          <a [routerLink]="['/admin/viewItem']">View Items</a>
-      </div>
-      <div>
-          <a [routerLink]="['/admin/addItem']">Add Item</a>
-      </div>
-      <div>
-          <a [routerLink]="['/admin/viewUsers']">View Users</a>
-      </div>
-    </div>
+    <div class="links">
+            <span id="register" [routerLink]="['/admin/viewItem']">
+                <span>View Items</span>
+            </span>
+            <span id="login" [routerLink]="['/admin/addItem']">
+                <span>Add Item</span>
+            </span>
+            <span id="manager" [routerLink]="['/admin/viewUsers']">
+                <span>View Users</span>
+            </span>
+     </div>
 
-<table class="table table-hover">
-<thead style="border: solid">
+<table class="table">
+<thead >
 <tr style="font-weight: bold">
-    <td style="border: solid"> ID</td>
-    <td style="border: solid"> Name</td>
-    <td style="border: solid"> Email</td>
-    <td style="border: solid">Username</td>
-    <td style="border: solid"> Activate </td>
-    <td colspan="2" style="border: solid"> Action </td>
+    <th id="heading" > ID</th>
+    <th id="heading" > Name</th>
+    <th id="heading" > Email</th>
+    <th id="heading" >Username</th>
+    <th id="heading" > Activate </th>
+    <th id="heading" > Action </th>
+    <th id="heading" > Action </th>
 </tr>
 </thead>
 
 <tbody>
     <tr *ngFor="let user of users">
-        <td style="border: solid">{{ user._id }}</td>
-        <td style="border: solid">{{ user.name }}</td>
-        <td style="border: solid">{{ user.email }}</td>
-        <td style="border: solid">{{ user.username }}</td>
-        <td style="border: solid">{{ user.activate }}</td>
-        <td style="border: solid"><button (click)="deactivateUser(user._id)">Deactivate/Activate</button></td>
-        <td style="border: solid"><button (click)="addToAdmin(user._id)">Add To Manager</button></td>
+        <td >{{ user._id }}</td>
+        <td >{{ user.name }}</td>
+        <td >{{ user.email }}</td>
+        <td >{{ user.username }}</td>
+        <td >{{ user.activate }}</td>
+        <td ><button (click)="deactivateUser(user._id)">Deactivate/Activate</button></td>
+        <td ><button (click)="addToAdmin(user._id)">Add To Manager</button></td>
     </tr>
 </tbody>
 </table>
